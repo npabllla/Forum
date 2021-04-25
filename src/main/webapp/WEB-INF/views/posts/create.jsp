@@ -38,7 +38,7 @@
                         <h6>
                             <label for="desc"> Описание </label>
                         </h6>
-                        <textarea id="desc" name='desc' rows="4" cols="50" placeholder="Введите описание"></textarea>
+                        <textarea id="desc" name='description' rows="4" cols="50" placeholder="Введите описание"></textarea>
                     </div>
                     <div class="card-form" style="margin-top: 10px">
                         <button name="submit" type="submit" class="btn btn-primary floated">

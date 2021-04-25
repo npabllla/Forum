@@ -10,7 +10,6 @@ import ru.job4j.forum.model.Post;
 import ru.job4j.forum.service.PostService;
 
 import java.util.Date;
-import java.util.Optional;
 
 @Controller
 public class PostControl {
@@ -24,17 +23,7 @@ public class PostControl {
     public String save(@ModelAttribute Post post) {
         post.setCreated(new Date(System.currentTimeMillis()));
         posts.add(post);
-        return "redirect:/post?id=" + posts.findByName(post.getName()).get().getId();
-    }
-
-    @PostMapping("/update")
-    public String update(@ModelAttribute Post post) {
-        Optional<Post> postFromMem = posts.findById(post.getId());
-        if (postFromMem.isPresent()) {
-            postFromMem.get().setDesc(post.getDesc());
-            postFromMem.get().setName(post.getName());
-        }
-        return "redirect:/post?id=" + post.getId();
+        return "redirect:/post?id=" + posts.findById(post.getId()).get().getId();
     }
 
     @GetMapping("/create")

@@ -26,7 +26,7 @@
                 <h4>Создание темы</h4>
             </div>
             <div class="card-body">
-                <form class="form" action="<c:url value='/update'/>" method='POST'>
+                <form class="form" action="<c:url value='/save?id=${post.id}'/>" method='POST'>
                     <div class="form-group">
                         <h6>
                             <label for="name"> Название </label>
@@ -38,8 +38,8 @@
                         <h6>
                             <label for="desc"> Описание </label>
                         </h6>
-                        <textarea id="desc" name='desc' rows="4" cols="50"
-                                  placeholder="Введите описание">${post.desc}</textarea>
+                        <textarea id="desc" name='description' rows="4" cols="50"
+                                  placeholder="Введите описание">${post.description}</textarea>
                     </div>
                     <div class="card-form" style="margin-top: 10px">
                         <button name="submit" type="submit" class="btn btn-primary floated">

@@ -36,11 +36,11 @@
         <div class="card">
             <div class="card-header">
                 <h5 style="float: left">Тема: <c:out value="${post.name}"/> (Автор: <c:out value="${post.author.name}"/>)</h5>
-                <h5 style="float: right">Дата создания: <c:out value="${post.created}"/></h5>
+                <h5 style="float: right">Дата изменения: <c:out value="${post.created}"/></h5>
             </div>
             <div class="card-body">
                 <h4>Описание:</h4>
-                <c:out value="${post.desc}"/>
+                <c:out value="${post.description}"/>
             </div>
         </div>
     </form>

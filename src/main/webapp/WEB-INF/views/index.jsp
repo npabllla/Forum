@@ -38,7 +38,7 @@
             <tr>
                 <th scope="col">Тема</th>
                 <th scope="col" style="width: 100px;">Автор</th>
-                <th scope="col" style="width: 250px">Дата создания</th>
+                <th scope="col" style="width: 250px">Дата изменения</th>
             </tr>
             </thead>
             <tbody>

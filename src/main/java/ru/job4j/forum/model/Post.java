@@ -1,19 +1,31 @@
 package ru.job4j.forum.model;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 
+@Entity
+@Table(name = "posts")
 public class Post {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
-    private String desc;
+
+    private String description;
+
+    @Temporal(TemporalType.TIMESTAMP)
     private Date created;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User author;
 
     public static Post of(String name, String desc, User author) {
         Post post = new Post();
         post.name = name;
-        post.desc = desc;
+        post.description = desc;
         post.author = author;
         post.created = new Date(System.currentTimeMillis());
         return post;
@@ -35,12 +47,12 @@ public class Post {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String desc) {
+        this.description = desc;
     }
 
     public Date getCreated() {
@@ -70,12 +82,12 @@ public class Post {
         Post post = (Post) o;
         return id == post.id
                 && Objects.equals(name, post.name)
-                && Objects.equals(desc, post.desc)
+                && Objects.equals(description, post.description)
                 && Objects.equals(created, post.created);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, desc, created);
+        return Objects.hash(id, name, description, created);
     }
 }
