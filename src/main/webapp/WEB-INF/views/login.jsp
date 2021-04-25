@@ -49,6 +49,7 @@
                                placeholder="Введите ваш пароль"/>
                     </div>
                     <button name="submit" type="submit" class="btn btn-primary" style="margin-top: 15px">Вход</button>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                 </form>
                 <form action="<c:url value='/reg'/>">
                     <button class="btn btn-primary">Регистариция</button>
