@@ -6,7 +6,7 @@ create table authorities(
 create table users(
     id           serial primary key,
     email        varchar(255) unique,
-    name         varchar(255),
+    username         varchar(255),
     password     varchar(255),
     enabled      boolean,
     authority_id int references authorities (id)
@@ -20,5 +20,22 @@ create table posts(
     user_id     int references users (id)
 );
 
-insert into authorities(authority) values ('ROLE_USER');
-insert into authorities(authority) values ('ROLE_ADMIN');
+create table comments(
+    id serial primary key,
+    content varchar(255),
+    created timestamp,
+    user_id int references users(id),
+    post_id int references posts(id)
+);
+
+create table answers(
+    id serial primary key,
+    content varchar(255),
+    created timestamp,
+    user_id int references users(id)
+);
+
+create table comments_answers(
+    comment_id int references comments(id),
+    answers_id int references answers(id)
+);

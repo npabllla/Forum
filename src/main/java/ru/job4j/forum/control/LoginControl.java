@@ -25,7 +25,7 @@ public class LoginControl {
             errorMessage = "Неверный логин или пароль";
         }
         if (logout != null) {
-            errorMessage = "Вы уже успешно вышли";
+            errorMessage = "Вы успешно вышли";
         }
         model.addAttribute("error", errorMessage);
         return "login";

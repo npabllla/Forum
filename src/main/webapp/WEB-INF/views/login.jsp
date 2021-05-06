@@ -52,7 +52,7 @@
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                 </form>
                 <form action="<c:url value='/reg'/>">
-                    <button class="btn btn-primary">Регистариция</button>
+                    <button class="btn btn-primary">Регистрация</button>
                     <label id="wrongUser" style="color: red">
                         <c:if test="${not empty error}">
                             ${error}

@@ -21,8 +21,16 @@ public class PostService {
         posts.save(post);
     }
 
+    public void delete(Post post) {
+        posts.delete(post);
+    }
+
     public Optional<Post> findById(int id) {
         return posts.findById(id);
+    }
+
+    public Optional<Post> findPostByCommentId(int id) {
+        return posts.findPostByCommentId(id);
     }
 
     public List<Post> getAll() {

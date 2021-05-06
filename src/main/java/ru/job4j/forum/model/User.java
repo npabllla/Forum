@@ -10,7 +10,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String name;
+    private String username;
 
     private String email;
 
@@ -22,9 +22,9 @@ public class User {
     @JoinColumn(name = "authority_id")
     private Authority authority;
 
-    public static User of(String name, String email, String password) {
+    public static User of(String username, String email, String password) {
         User user = new User();
-        user.name = name;
+        user.username = username;
         user.email = email;
         user.password = password;
         return user;
@@ -38,12 +38,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -62,20 +62,20 @@ public class User {
         this.password = password;
     }
 
-    public Authority getAuthority() {
-        return authority;
-    }
-
-    public void setAuthority(Authority authority) {
-        this.authority = authority;
-    }
-
     public boolean isEnabled() {
         return enabled;
     }
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Authority getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(Authority authority) {
+        this.authority = authority;
     }
 
     @Override

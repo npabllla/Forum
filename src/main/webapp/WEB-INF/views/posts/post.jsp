@@ -18,6 +18,12 @@
             display: inline;
             float: right;
         }
+        .btn-outline-danger{
+            margin-left: 15px;
+        }
+        .card {
+            margin-top: 25px;
+        }
     </style>
 </head>
 <body>
@@ -25,22 +31,72 @@
     <form style="margin-top: 15px">
         <h3>
             <a style="color: black" href="<c:url value='/'/>"> Форум job4j</a>
-            <a class="header" style="font-size: medium">Текущий пользователь: ${user.name}</a>
+            <a class="header" style="font-size: medium">Текущий пользователь: ${user.username}</a>
         </h3>
-        <a class="header" href="<c:url value='/login'/>" style="margin-top: -15px">Сменить пользователя</a>
+        <a class="header" href="<c:url value='/logout'/>" style="margin-top: -15px">Сменить пользователя</a>
     </form>
     <form>
-        <a class="btn btn-outline-secondary" href="<c:url value='/load?id=${post.id}'/>">Редактировать тему</a>
+        <c:if test="${user.authority.authority == 'ROLE_ADMIN' || user == post.author}">
+            <a class="btn btn-outline-secondary" href="<c:url value='/load?id=${post.id}'/>">Редактировать тему</a>
+            <a class="btn btn-outline-danger" href="<c:url value='/delete?id=${post.id}'/>">Удалить тему</a>
+        </c:if>
     </form>
-    <form style="margin-top: 10px">
+    <form>
         <div class="card">
             <div class="card-header">
-                <h5 style="float: left">Тема: <c:out value="${post.name}"/> (Автор: <c:out value="${post.author.name}"/>)</h5>
+                <h5 style="float: left">Тема: <c:out value="${post.name}"/> (Автор: <c:out
+                        value="${post.author.username}"/>)</h5>
                 <h5 style="float: right">Дата изменения: <c:out value="${post.created}"/></h5>
             </div>
             <div class="card-body">
                 <h4>Описание:</h4>
                 <c:out value="${post.description}"/>
+                <div style="margin-top: 25px">
+                    <a class="btn btn-outline-primary" href="<c:url value='/comment?id=${post.id}'/>">Добавить
+                        комментарий</a>
+                </div>
+                <c:forEach items="${comments}" var="comment">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 style="float: left">
+                                Комментарий от <c:out value="${comment.author.username}"/>'а
+                            </h6>
+                            <h6 style="float: right">
+                                Дата создания: <c:out value="${comment.created}"/>
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <h5>Содержание:</h5>
+                            <c:out value="${comment.content}"/>
+                            <div style="margin-top: 25px">
+                                <a class="btn btn-outline-primary" href="<c:url value='/answer?id=${comment.id}'/>">
+                                    Ответить</a>
+                                <c:if test="${user.authority.authority == 'ROLE_ADMIN'}">
+                                    <a class="btn btn-outline-danger" href="<c:url value='/deleteComment?id=${comment.id}'/>">
+                                        Удалить комментарий</a>
+                                </c:if>
+                                <c:forEach items="${comment.answers}" var="answer">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <a style="float: left">
+                                                Ответ от <c:out value="${answer.author.username}"/>'а</a>
+                                            <a style="float: right">
+                                                Дата создания: <c:out value="${answer.created}"/></a>
+                                        </div>
+                                        <div class="card-body">
+                                            <c:out value="${answer.content}"/>
+                                            <c:if test="${user.authority.authority == 'ROLE_ADMIN'}">
+                                                <a class="btn btn-outline-danger" style="float: right"
+                                                   href="<c:url value='/deleteAnswer?id=${answer.id}'/>">
+                                                    Удалить ответ</a>
+                                            </c:if>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
             </div>
         </div>
     </form>
